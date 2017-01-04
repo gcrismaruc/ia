@@ -45,8 +45,6 @@ public class ForwardChaining {
                     } else {
                         inferred.add(newClause);
                     }
-
-                    break;
                 }
 
                 clauseIndex++;

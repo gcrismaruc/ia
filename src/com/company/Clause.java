@@ -40,7 +40,7 @@ public class Clause {
                     if (pToReplace.getTerm(0) == (knownPredicate.getTerm(0))) {
                         System.out.println("Resolved");
                     } else {
-                        newClause.getClause().add((Predicate) pToReplace.replaceVariables(s));
+                        newClause.getClause().add(pToReplace.replaceVariables(s));
                     }
                 }
 
