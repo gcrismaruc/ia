@@ -4,25 +4,31 @@ import java.util.*;
 
 public class Main {
     public static  void socrate() {
-        Constant socrate = new Constant("socrate");
-        Variable X = new Variable("X");
-        Constant om = new Constant("om");
-        Constant muritor = new Constant("muritor");
+        Parser parser = new Parser();
+        List<Clause> clauses = parser.readFile("data/socrate.facts");
 
-        ArrayList<Clause> clauses = new ArrayList<>();
+        Clause goal = clauses.get(clauses.size() - 1);
+        clauses.remove(clauses.size() - 1);
 
-        List<Predicate> clauseList = new ArrayList<>();
-        clauseList.add(new Predicate(om, true, socrate));
-        clauses.add(new Clause(clauseList));
-
-        clauseList = new ArrayList<>();
-        clauseList.add(new Predicate(om, false, X));
-        clauseList.add(new Predicate(muritor, true, X));
-        clauses.add(new Clause(clauseList));
-
-        clauseList = new ArrayList<>();
-        clauseList.add(new Predicate(muritor, false, socrate));
-        Clause goal = new Clause(clauseList);
+//        Constant socrate = new Constant("socrate");
+//        Variable X = new Variable("X");
+//        Constant om = new Constant("om");
+//        Constant muritor = new Constant("muritor");
+//
+//        ArrayList<Clause> clauses = new ArrayList<>();
+//
+//        List<Predicate> clauseList = new ArrayList<>();
+//        clauseList.add(new Predicate(om, true, socrate));
+//        clauses.add(new Clause(clauseList));
+//
+//        clauseList = new ArrayList<>();
+//        clauseList.add(new Predicate(om, false, X));
+//        clauseList.add(new Predicate(muritor, true, X));
+//        clauses.add(new Clause(clauseList));
+//
+//        clauseList = new ArrayList<>();
+//        clauseList.add(new Predicate(muritor, false, socrate));
+//        Clause goal = new Clause(clauseList);
 
         ForwardChaining.forwardChaining(clauses, goal);
     }
@@ -141,9 +147,9 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Socrate");
         socrate();
-        System.out.println("Joe");
-        joe();
-        System.out.println("West");
-        west();
+        //System.out.println("Joe");
+        //joe();
+        //System.out.println("West");
+        //west();
     }
 }

@@ -25,11 +25,13 @@ public class Variable implements Unifiable {
     }
 
 
+    //Changed == with .equals, so it will work for
+    //two different instances (our case)
     @Override
     public SubstitutionSet unify(Unifiable p,
                                  SubstitutionSet s)
     {
-        if (this == p) return s;
+        if (p instanceof Variable && this.equals(p)) return s;
         if(s.isBound(this))
             return s.getBinding(this).unify(p, s);
         SubstitutionSet sNew = new SubstitutionSet(s);
@@ -45,5 +47,10 @@ public class Variable implements Unifiable {
             return s.getBinding(this).replaceVariables(s);
         else
             return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof Variable && this.name.equals(((Variable)o).name);
     }
 }

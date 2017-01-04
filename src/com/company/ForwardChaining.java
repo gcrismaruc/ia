@@ -41,6 +41,7 @@ public class ForwardChaining {
                             System.out.println("Succes!");
                         } else {
                             agenda.add(newClause);
+                            clauseIndex--;
                         }
                     } else {
                         inferred.add(newClause);

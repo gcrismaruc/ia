@@ -110,4 +110,5 @@ public class Predicate implements Unifiable {
 
         return true;
     }
+
 }

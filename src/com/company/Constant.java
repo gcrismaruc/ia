@@ -30,14 +30,21 @@ public class Constant implements Unifiable {
         return  this;
     }
 
+    //Changed == with .equals, so it will work for
+    //two different instances (our case)
     @Override
     public SubstitutionSet unify(Unifiable exp,
                                  SubstitutionSet s)
     {
-        if (this == exp)
+        if (exp instanceof Constant && this.equals(exp))
             return new SubstitutionSet(s);
         if (exp instanceof Variable)
             return exp.unify(this, s);
         return null;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof Constant && this.name.equals(((Constant)o).name);
     }
 }

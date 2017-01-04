@@ -37,7 +37,7 @@ public class Clause {
 
             if (s != null) {
                 for (Predicate pToReplace : clause) {
-                    if (pToReplace.getTerm(0) == (knownPredicate.getTerm(0))) {
+                    if (pToReplace.getTerm(0).equals((knownPredicate.getTerm(0)))) {
                         System.out.println("Resolved");
                     } else {
                         newClause.getClause().add(pToReplace.replaceVariables(s));

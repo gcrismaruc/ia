@@ -24,15 +24,26 @@ public class SubstitutionSet {
         this.bindings.put(v, exp);
     }
 
+    //Changed to work in our case
     public Unifiable getBinding(Variable v){
-        if(this.bindings.containsKey(v))
-            return this.bindings.get(v);
-        else
-            return null;
+        for (Variable binding : bindings.keySet()) {
+            if (binding.equals(v)) {
+                return bindings.get(binding);
+            }
+        }
+
+        return null;
     }
 
+    //Changed to work in our case
     public boolean isBound(Variable v){
-        return this.bindings.get(v) != null;
+        for (Variable binding : bindings.keySet()) {
+            if (binding.equals(v)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @Override
