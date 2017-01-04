@@ -3,95 +3,84 @@ package com.company;
 import java.util.*;
 
 public class Main {
-
-    private static void forwardChaining(List<Clause> clauses, Predicate goal) {
-        List<Integer> count = new ArrayList<Integer>();
-        Map<Clause, Boolean> inferred = new HashMap<Clause, Boolean>();
-        List<Predicate> agenda = new ArrayList<>();
-
-        Map<Clause, Boolean> newInferred;
-
-        for (Clause c : clauses) {
-            inferred.put(c, false);
-            if (c.getClause().size() == 1) {
-                agenda.add(c.getClause().get(0));
-            }
-        }
-
-        while (!agenda.isEmpty()) {
-            Predicate p = agenda.get(0);
-            agenda.remove(0);
-
-            newInferred = new HashMap<>(inferred);
-
-            for (Clause i : inferred.keySet()) {
-                if (!inferred.get(i)) {
-                    newInferred.replace(i, true);
-
-                    if (predicateIsInClause(i, p)) {
-                    //if (i.getClause().indexOf(p) != -1) {
-                        Clause newClause = i.resolve(p);
-
-                        if (newClause.getClause().size() == 1) {
-                            if (newClause.getClause().get(0).isEqual(goal)) {
-                                System.out.println("Succes!");
-                            } else {
-                                agenda.add(newClause.getClause().get(0));
-                            }
-                        } else {
-                            newInferred.put(newClause, false);
-                        }
-                    }
-                }
-            }
-
-            inferred = newInferred;
-        }
-        System.out.println("Failed!");
-    }
-
-    static boolean predicateIsInClause(Clause clause, Predicate predicateToFind) {
-        for (Predicate predicate : clause.getClause()) {
-            if (predicate.getTerm(0).equals(predicateToFind.getTerm(0))) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public static void main(String[] args) {
-        Constant socrate = new Constant("socrate");
+        /*
+        SOCRATE
+         */
+//        Constant socrate = new Constant("socrate");
+//        Variable X = new Variable("X");
+//        Constant om = new Constant("om");
+//        Constant muritor = new Constant("muritor");
+//
+//
+//        ArrayList<Clause> clauses = new ArrayList<>();
+//
+//        Predicate firstPredicate = new Predicate(om, true, socrate);
+//        List<Predicate> firstClause = new ArrayList<>();
+//        firstClause.add(firstPredicate);
+//
+//        clauses.add(new Clause(firstClause));
+//
+//        Predicate secondPredicate = new Predicate(om, false, X);
+//        Predicate thirdPredicate = new Predicate(muritor, true, X);
+//        List<Predicate> secondClause = new ArrayList<>();
+//        secondClause.add(secondPredicate);
+//        secondClause.add(thirdPredicate);
+//
+//        clauses.add(new Clause(secondClause));
+//
+//        Predicate goal = new Predicate(muritor, true, socrate);
+//
+//        ForwardChaining.forwardChaining(clauses, goal);
+
+        /*
+        SMART/SKATE JOE
+         */
+        Constant joe = new Constant("joe");
         Variable X = new Variable("X");
-        Constant om = new Constant("om");
-        Constant muritor = new Constant("muritor");
+        Variable Y = new Variable("Y");
+        Variable Z = new Variable("Z");
+        Constant smart = new Constant("smart");
+        Constant likesHockey = new Constant("likesHockey");
+        Constant canadian = new Constant("canadian");
+        Constant skates = new Constant("skates");
+        Constant rpi = new Constant("rpi");
 
         Vector<Unifiable> expressions = new Vector<>();
 
-        expressions.add(new Predicate(om, socrate));
-        expressions.add(new Predicate(om, X));
-        expressions.add(new Predicate(muritor, X));
-
         ArrayList<Clause> clauses = new ArrayList<>();
 
-        Predicate firstPredicate = new Predicate(om, true, socrate);
-        List<Predicate> firstClause = new ArrayList<>();
-        firstClause.add(firstPredicate);
+        List<Predicate> clauseList = new ArrayList<>();
+        clauseList.add(new Predicate(smart, true, X));
+        clauseList.add(new Predicate(likesHockey, false, X));
+        clauseList.add(new Predicate(rpi, false, X));
+        clauses.add(new Clause(clauseList));
 
-        clauses.add(new Clause(firstClause));
+//        clauseList = new ArrayList<>();
+//        clauseList.add(new Predicate(canadian, true, Y));
+//        clauseList.add(new Predicate(likesHockey, false, Y));
+//        clauses.add(new Clause(clauseList));
 
-        Predicate secondPredicate = new Predicate(om, false, X);
-        Predicate thirdPredicate = new Predicate(muritor, true, X);
-        List<Predicate> secondClause = new ArrayList<>();
-        secondClause.add(secondPredicate);
-        secondClause.add(thirdPredicate);
+        clauseList = new ArrayList<>();
+        clauseList.add(new Predicate(skates, true, Z));
+        clauseList.add(new Predicate(likesHockey, false, Z));
+        clauses.add(new Clause(clauseList));
 
-        clauses.add(new Clause(secondClause));
+        clauseList = new ArrayList<>();
+        clauseList.add(new Predicate(smart, false, joe));
+        clauses.add(new Clause(clauseList));
 
-        Predicate goal = new Predicate(muritor, true, socrate);
+        clauseList = new ArrayList<>();
+        clauseList.add(new Predicate(skates, false, joe));
+        clauses.add(new Clause(clauseList));
 
-        forwardChaining(clauses, goal);
-//
-//
+        clauseList = new ArrayList<>();
+        clauseList.add(new Predicate(rpi, false, joe));
+        Clause goal = new Clause(clauseList);
+
+        ForwardChaining.forwardChaining(clauses, goal);
+
+
 //        Constant american = new Constant("american");
 //        Constant weapon = new Constant("weapon");
 //        Constant sells = new Constant("sells");

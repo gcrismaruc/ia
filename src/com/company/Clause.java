@@ -26,16 +26,18 @@ public class Clause {
         this.clause = s;
     }
 
-    Clause resolve(Unifiable unifiable) {
+    Clause resolve(Clause monoClause) {
         SubstitutionSet s;
         Clause newClause = new Clause();
 
+        Predicate knownPredicate = monoClause.getClause().get(0);
+
         for (Unifiable p : clause) {
-            s = p.unify(unifiable, new SubstitutionSet());
+            s = p.unify(knownPredicate, new SubstitutionSet());
 
             if (s != null) {
                 for (Predicate pToReplace : clause) {
-                    if (pToReplace.getTerm(0) == ((Predicate)unifiable).getTerm(0)) {
+                    if (pToReplace.getTerm(0) == (knownPredicate.getTerm(0))) {
                         System.out.println("Resolved");
                     } else {
                         newClause.getClause().add((Predicate) pToReplace.replaceVariables(s));
