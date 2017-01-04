@@ -96,4 +96,18 @@ public class Predicate implements Unifiable {
                     (Unifiable)terms[i].replaceVariables(s);
         return new Predicate(newTerms);
     }
+
+    public boolean isEqual(Predicate p) {
+        if (terms.length != p.terms.length) {
+            return false;
+        }
+
+        for (int i = 0; i < terms.length; ++i) {
+            if (!terms[i].equals(p.terms[i])) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

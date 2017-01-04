@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,6 +19,7 @@ public class Clause {
     private List<Predicate> clause;
 
     public Clause(){
+        clause = new ArrayList<Predicate>();
     }
 
     public Clause(List<Predicate> s){
@@ -26,22 +28,25 @@ public class Clause {
 
     Clause resolve(Unifiable unifiable) {
         SubstitutionSet s;
+        Clause newClause = new Clause();
 
         for (Unifiable p : clause) {
             s = p.unify(unifiable, new SubstitutionSet());
 
             if (s != null) {
-                for (Unifiable pToReplace : clause) {
-                    pToReplace.replaceVariables(s);
+                for (Predicate pToReplace : clause) {
+                    if (pToReplace.getTerm(0) == ((Predicate)unifiable).getTerm(0)) {
+                        System.out.println("Resolved");
+                    } else {
+                        newClause.getClause().add((Predicate) pToReplace.replaceVariables(s));
+                    }
                 }
 
                 break;
             }
         }
 
-        clause.remove(unifiable);
-
-        return new Clause(clause);
+        return newClause;
     }
 
 }
