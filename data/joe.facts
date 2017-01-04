@@ -1,0 +1,7 @@
+NOT Smart(X) OR NOT LikesHockey(X) OR RPI(X)
+NOT Canadian(Y) OR LikesHockey(Y)
+NOT Skates(Z) OR LikesHockey(Z)
+Smart(Joe)
+Skates(Joe)
+
+RPI(Joe)

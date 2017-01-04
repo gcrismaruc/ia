@@ -1,0 +1,10 @@
+NOT American(X) OR NOT Weapon(Y) OR NOT Sells(X,Y,Z) OR NOT Hostile(Z) OR Criminal(X)
+Owns(Nono,M1)
+Missile(M1)
+NOT Missile(M1) OR NOT Owns(Nono,X) OR Sells(West,X,Nono)
+NOT Missile(X) OR Weapon(X)
+NOT Enemy(X,America) OR Hostile(X)
+American(West)
+Enemy(Nono,America)
+
+Criminal(West)
