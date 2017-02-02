@@ -31,6 +31,11 @@ public class Predicate implements Unifiable {
         System.arraycopy(args, 0, terms, 1, args.length);
     }
 
+    public Predicate(Unifiable[] terms, boolean isNegative){
+        this.terms = terms;
+        this.isNegative = isNegative;
+    }
+
     @Override
     public String toString(){
 
@@ -94,7 +99,7 @@ public class Predicate implements Unifiable {
         for(int i = 0; i < length(); i++)
             newTerms[i] =
                     (Unifiable)terms[i].replaceVariables(s);
-        return new Predicate(newTerms);
+        return new Predicate(newTerms, this.isNegative);
     }
 
     public boolean isEqual(Predicate p) {

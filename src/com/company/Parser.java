@@ -44,6 +44,7 @@ public class Parser {
         boolean isNegative = false;
 
         for (String predicateString : predicateStrings) {
+            isNegative = false;
             predicateString = predicateString.trim();
             if (predicateString.startsWith("NOT")) {
                 isNegative = true;
